@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/back.png" type="Texture" id=2]
+[ext_resource path="res://Health.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Background.gd" type="Script" id=4]
+[ext_resource path="res://World.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Gatling.png" type="Texture" id=6]
+[ext_resource path="res://SelectedGun.gd" type="Script" id=8]
+[ext_resource path="res://Assets/RocketLauncher.png" type="Texture" id=9]
+[ext_resource path="res://Rocket.tscn" type="PackedScene" id=10]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Background" type="ParallaxBackground" parent="."]
+script = ExtResource( 4 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background"]
+motion_mirroring = Vector2( 2048, 1536 )
+
+[node name="BackgroundSprite" type="Sprite" parent="Background/ParallaxLayer"]
+texture = ExtResource( 2 )
+centered = false
+region_rect = Rect2( 0, 0, 1024, 640 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 519.016, 433.493 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 3 )]
+margin_left = 11.0
+margin_top = 17.0
+margin_right = 111.0
+margin_bottom = 28.0
+
+[node name="Container" type="ColorRect" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_top = -40.75
+margin_right = 43.0
+margin_bottom = -8.75
+color = Color( 0.8, 0.803922, 0.682353, 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gatling" type="Sprite" parent="CanvasLayer/Container"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Rocket" type="Sprite" parent="CanvasLayer/Container"]
+visible = false
+texture = ExtResource( 9 )
+centered = false
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Rocket" parent="." instance=ExtResource( 10 )]
+position = Vector2( 518.943, 342.5 )
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
