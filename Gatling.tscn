@@ -10,10 +10,10 @@ extents = Vector2( 16.2334, 16.4087 )
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -19.799
-margin_top = -19.9758
-margin_right = 20.201
-margin_bottom = 20.0242
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

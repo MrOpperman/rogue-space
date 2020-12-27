@@ -56,6 +56,7 @@ func _on_Hurtbox_body_entered(body):
 				if (stats.health < stats.max_health):
 					stats.health += 1
 					print('drop health!')
+			stats.score += 10
 			queue_free()
 			
 		hurtBox.start_invincibility(0.4)

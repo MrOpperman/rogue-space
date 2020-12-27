@@ -16,6 +16,7 @@ var bullets = 0
 var playerFollow = true
 var velocity = Vector2()
 var shooting = true
+var stats = PlayerStats
 
 func _ready():
 	randomize()
@@ -65,6 +66,7 @@ func _on_Hurtbox_body_entered(body):
 			rocket.position = position
 			get_parent().add_child(rocket)
 			
+			stats.score += 100
 			queue_free()
 		hurtBox.start_invincibility(0.4)
 

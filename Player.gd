@@ -55,16 +55,21 @@ func _physics_process(delta):
 
 func _on_Timer_timeout():
 	bullets = 0
-
-func _on_Hurtbox_body_entered(body):
+	
+func take_damage(): 
 	if (!hurtBox.invincible):
-	#if (!true):
 		stats.health -= 0.5
 	hurtBox.start_invincibility(0.6)
 	hurtBox.create_hit_effect()
+
+func _on_Hurtbox_body_entered(body):
+	take_damage()
 
 func _on_Hurtbox_invinciblity_started():
 	blinkAnimationPlayer.play("Start")
 
 func _on_Hurtbox_invinciblity_ended():
-		blinkAnimationPlayer.play("Stop")
+	blinkAnimationPlayer.play("Stop")
+
+func _on_Hurtbox_area_entered(area):
+	take_damage()
