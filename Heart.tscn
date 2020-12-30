@@ -1,19 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/RocketLauncher.png" type="Texture" id=1]
-[ext_resource path="res://Rocket.gd" type="Script" id=2]
+[ext_resource path="res://Assets/LifeUIFull.png" type="Texture" id=1]
+[ext_resource path="res://Heart.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.00001, 8.03751 )
 
-[node name="Rocket" type="Area2D"]
+[node name="Heart" type="Area2D"]
+scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

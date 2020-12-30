@@ -4,6 +4,7 @@ var enemy_1 = preload("res://Enemy.tscn")
 var boss_1 = preload("res://Boss.tscn")
 var Asteroid = preload("res://Asteroid.tscn")
 var Asteroid2 = preload("res://Asteroid2.tscn")
+var Spinny = preload("res://Spinny.tscn")
 
 onready var WaveLabel = $CanvasLayer/WaveLabel
 onready var Score = $CanvasLayer/Score
@@ -20,6 +21,7 @@ func _on_EnemySpawnTimer_timeout():
 	spawn_enemies()
 	#if (wave > 2):
 	spawn_asteroid()
+	spawn_spinny()
 	
 func wave_generator():
 	var enemies = get_tree().get_nodes_in_group("enemies")
@@ -74,3 +76,8 @@ func spawn_asteroid():
 	var asteroid = asteroids[randi()%2].instance()
 	asteroid.position = asteroid_position
 	add_child(asteroid)
+
+func spawn_spinny():
+	var spinny = Spinny.instance()
+	spinny.position = Vector2(rand_range(0, 1054), -50)
+	add_child(spinny)

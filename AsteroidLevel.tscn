@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Background.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Gatling.png" type="Texture" id=3]
 [ext_resource path="res://Assets/back.png" type="Texture" id=4]
+[ext_resource path="res://Muscle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Health.tscn" type="PackedScene" id=6]
 [ext_resource path="res://AsteroidLevel.gd" type="Script" id=7]
 [ext_resource path="res://SelectedGun.gd" type="Script" id=8]
@@ -86,4 +87,7 @@ position = Vector2( 519.016, 433.493 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
 autostart = true
+
+[node name="Muscle" parent="." instance=ExtResource( 5 )]
+position = Vector2( 518.943, 217 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

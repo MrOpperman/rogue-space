@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var Bullet = load("res://Bullet.tscn")
+var MusclePowerupTimer = load("res://Muscle.tscn")
  
 onready var sprite = $PlayerSprite
 onready var hurtBox = $Hurtbox
@@ -12,6 +13,13 @@ var stats = PlayerStats
 var speed = 350
 var velocity = Vector2()
 var bullets = 0
+var original_scale = scale
+
+var perma_invincibility = false
+
+func _ready():
+	stats.connect("muscle_powerup_start", self, "muscle_powerup_started")
+	stats.connect("muscle_powerup_stop", self, "muscle_powerup_ended")
 
 func get_input():
 	velocity = Vector2()
@@ -57,6 +65,7 @@ func _on_Timer_timeout():
 	bullets = 0
 	
 func take_damage(): 
+	if (perma_invincibility): return
 	if (!hurtBox.invincible):
 		stats.health -= 0.5
 	hurtBox.start_invincibility(0.6)
@@ -73,3 +82,12 @@ func _on_Hurtbox_invinciblity_ended():
 
 func _on_Hurtbox_area_entered(area):
 	take_damage()
+
+func muscle_powerup_started():
+	perma_invincibility = true
+	scale = scale * 2
+	hurtBox.start_invincibility(10)
+	
+func muscle_powerup_ended():
+	perma_invincibility = false
+	scale = original_scale

@@ -1,17 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Asteroid1.png" type="Texture" id=1]
 [ext_resource path="res://Asteroid.gd" type="Script" id=2]
 [ext_resource path="res://WhiteColour.shader" type="Shader" id=3]
-[ext_resource path="res://Hurtbox.gd" type="Script" id=4]
 [ext_resource path="res://Hurtbox.tscn" type="PackedScene" id=5]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/active = false
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 9.15359
 
 [sub_resource type="CircleShape2D" id=3]
@@ -54,19 +53,16 @@ scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4.15425 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
-[node name="Hurtbox" type="Area2D" parent="." instance=ExtResource( 5 )]
-collision_layer = 2
-collision_mask = 2
-script = ExtResource( 4 )
+[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, 4.15425 )
 shape = SubResource( 3 )
 
@@ -77,6 +73,5 @@ anims/Stop = SubResource( 5 )
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="invinciblity_ended" from="Hurtbox" to="." method="_on_Hurtbox_invinciblity_ended"]
 [connection signal="invinciblity_started" from="Hurtbox" to="." method="_on_Hurtbox_invinciblity_started"]
-[connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 
 [editable path="Hurtbox"]

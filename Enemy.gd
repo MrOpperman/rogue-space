@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 var EnemyBullet = load("res://Bullet.tscn")
+var Heart = preload("res://Heart.tscn")
+var MusclePowerup = preload("res://Muscle.tscn")
 
 export (NodePath) var patrolPath
 export var health = 5
@@ -54,8 +56,15 @@ func _on_Hurtbox_body_entered(body):
 			var random = rand_range(1, 100)
 			if (random > 90):
 				if (stats.health < stats.max_health):
-					stats.health += 1
-					print('drop health!')
+					var heart = Heart.instance()
+					heart.position = position
+					get_parent().add_child(heart)
+			elif(random > 80 && random < 90):
+				if (!stats.muscle_powerup):
+					var muscle = MusclePowerup.instance()
+					muscle.position = position
+					get_parent().add_child(muscle)
+
 			stats.score += 10
 			queue_free()
 			
