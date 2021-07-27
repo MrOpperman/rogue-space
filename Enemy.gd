@@ -3,6 +3,7 @@ extends KinematicBody2D
 var EnemyBullet = load("res://Bullet.tscn")
 var Heart = preload("res://Heart.tscn")
 var MusclePowerup = preload("res://Muscle.tscn")
+const EnemyDeathEffect = preload("res://EnemyDeathEffect.tscn")
 
 export (NodePath) var patrolPath
 export var health = 5
@@ -67,8 +68,12 @@ func _on_Hurtbox_body_entered(body):
 
 			stats.score += 10
 			queue_free()
+			var enemyDeathEffect = EnemyDeathEffect.instance()
+			get_parent().add_child(enemyDeathEffect)
+			enemyDeathEffect.global_position = global_position
 			
 		hurtBox.start_invincibility(0.4)
+		hurtBox.create_hit_effect()
 
 func _on_Hurtbox_invinciblity_ended():
 	animationPlayer.play("Stop")
